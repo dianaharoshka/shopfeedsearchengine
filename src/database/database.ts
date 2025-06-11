@@ -10,7 +10,6 @@ export interface ProductInfo extends RowDataPacket {
   category_id: number;
   is_popular: number;
   image_url: string;
-  description2: string;
 }
 
 export interface ProductId extends RowDataPacket {

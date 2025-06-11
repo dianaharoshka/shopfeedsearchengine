@@ -1,7 +1,6 @@
 const url = process.env.SEARCH_URL;
 const accessKey = process.env.ACCESS_KEY;
 const secretKey = process.env.SECRET_KEY;
-
 export async function update(index_name: string, docid: string, product: any) {
   let headers = new Headers();
 

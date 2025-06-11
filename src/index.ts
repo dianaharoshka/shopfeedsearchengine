@@ -35,24 +35,12 @@ for (const product of products) {
     webid: product.id,
     title: product.title,
     description: product.description2,
-    combinedsearchtext:
-      product.title +
-      " " +
-      product.description2 +
-      " " +
-      product.color2 +
-      " " +
-      product.categoryName,
+    combinedsearchtext: product.title + " " + product.categoryName,
     price: product.price,
     categoryName: product.categoryName,
     stockLevel: product.stockLevel,
-    color: product.color2,
     categoryid: product.categoryId,
     string_facet: [
-      {
-        facet_name: "Color",
-        facet_value: product.color2,
-      },
       {
         facet_name: "Category",
         facet_value: product.categoryName,
