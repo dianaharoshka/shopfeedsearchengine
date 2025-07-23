@@ -19,7 +19,6 @@ export interface ProductId extends RowDataPacket {
 export async function getProductId(
   name: string
 ): Promise<ProductId | undefined> {
-  // SELECT id * FROM Products WHERE title=productName
   const conn = await connection;
 
   const [rows] = await conn.query<ProductId[]>(
@@ -33,7 +32,6 @@ export async function getProductId(
 }
 
 export async function getAllProducts(): Promise<ProductInfo[]> {
-  // SELECT id * FROM Products WHERE title=productName
   const conn = await connection;
 
   const [rows] = await conn.query<ProductInfo[]>(
@@ -47,8 +45,6 @@ export async function updateProductDescription(
   description: string,
   color: string
 ) {
-  // vi hjar ju skapat en koklumn i Products spom heter description2
-  // också en som heter color2
   const conn = await connection;
   await conn.execute(
     "UPDATE Products SET description2=?, color2=? WHERE id=?",

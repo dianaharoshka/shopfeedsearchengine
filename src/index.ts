@@ -17,20 +17,12 @@ import {
 
 let index_name = process.env.SEARCH_INDEX_NAME || "default_index";
 
-// await dropIndex(index_name); // ta bort indexet om det finns, annars skapar vi ett nytt
-//exit();
-// 1. Finns det ett index i betasearch.systementor.se som har mitt namn?
 if ((await indexExists(index_name)) == false) {
   createIndex(index_name, "english"); //swedish
 }
-// 2. Om inte - skapa !
 
 const products = await getAllProducts();
 for (const product of products) {
-  // finns det ett id i betasearch som matchar produktens id?
-  // om ja - update
-  // else - create
-  // create new!
   const searchObject = {
     webid: product.id,
     title: product.title,
@@ -39,7 +31,8 @@ for (const product of products) {
     price: product.price,
     categoryName: product.categoryName,
     stockLevel: product.stockLevel,
-    categoryid: product.categoryId,
+    category_id: product.category_id,
+    image_url: product.image_url,
     string_facet: [
       {
         facet_name: "Category",
@@ -47,17 +40,14 @@ for (const product of products) {
       },
     ],
   };
-  // om produlkten finns - update annars add
+
   const docId = await getDocumentIdOrUndefined(
     index_name,
     product.id.toString()
   );
   if (docId != undefined) {
-    update(index_name, docId, searchObject); // DOC ID SKA SKICKAS IN inte product.id
-    // UPDATE
+    update(index_name, docId, searchObject);
   } else {
     add(index_name, searchObject);
   }
-
-  //  console.log(product.id, product.title, product.categoryName);
 }
